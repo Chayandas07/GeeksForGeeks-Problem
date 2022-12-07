@@ -1,0 +1,47 @@
+/*Complete the function below
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution {
+  private:
+        int numOfIterations = 0;
+        int k;
+        int ans = -1;
+    
+    public:
+        void search(Node* root)
+        {
+            if(root)
+            {
+                search(root->left);
+                
+                numOfIterations++;
+                
+                if(numOfIterations == k)
+                    ans = root->data;
+                else if(numOfIterations > k)
+                    return ;
+                    
+                search(root->right);
+            }
+        }
+        
+        int KthSmallestElement(Node *root, int K)
+        {
+            k = K;
+            
+            search(root);
+            
+            return ans;
+        }
+};
