@@ -1,0 +1,39 @@
+class Solution{
+    public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort(intervals.begin(),intervals.end());
+        vector<vector<int>>ans;
+        
+        for(auto it: intervals){
+            if(!ans.empty() && it[0]<=ans.back()[1]){
+                ans.back()[1] = max(ans.back()[1],it[1]);
+            }
+            else ans.push_back(it);
+        }
+
+        return ans;
+    }
+    
+    vector<int>kthSmallestNum(int n, vector<vector<int>>&range, int q, vector<int>queries){
+        range = merge(range);
+        n = range.size();
+        
+        vector<int>ans;
+        
+        for(int i=0;i<q;i++){
+            int k = queries[i];
+            
+            for(int i=0;i<n;i++){
+                int total = range[i][1]-range[i][0]+1;
+                if(total>=k){
+                    ans.push_back(range[i][0]+k-1);
+                }
+                k-=total;
+                if(k<=0)break;
+            }
+            if(k>0)ans.push_back(-1);
+        }
+        
+        return ans;
+    } 
+};
