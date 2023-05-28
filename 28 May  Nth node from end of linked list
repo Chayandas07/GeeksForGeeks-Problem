@@ -1,0 +1,30 @@
+class Solution{
+public:
+    int getNthFromLast(Node *head, int n)
+    {
+        //code in c++
+// count variable to count the total no of node
+   int count = 0;
+            Node * t;
+            t = head;
+            while(t!=NULL){
+               count++;
+               t=t->next;
+            }
+          //base case if given n is greater then size
+            if(n>count){
+                return -1;
+            }
+            //till the nth node from back
+            n = count-n;
+            t = head;
+// again count variable to raech n
+            count = 0;
+            while(count!=n){
+                count++;
+                t=t->next;
+            }
+            return t->data;
+           // Your code here
+    }
+};
