@@ -1,0 +1,42 @@
+class Solution {
+  public:
+    vector<string> CamelCase(int N, vector<string> Dictionary, string Pattern) {
+        // code here
+        unordered_map<int,string> m;
+        for(int i = 0;i<Dictionary.size();i++){
+            m[i] = Dictionary[i];
+        }
+        vector<string>v;
+        for(auto i:Dictionary){
+            string temp = "";
+            for(auto j:i){
+                if(isupper(j)){
+                    temp+=j;
+                }
+            }
+            if((int)temp.size()>(int)Pattern.size()){
+                string temp1 = temp.substr(0,(int)Pattern.size());
+                v.push_back(temp1);
+            }
+            else{
+            v.push_back(temp);
+            }
+        }
+        vector<string> ans;
+        int len = Pattern.size();
+  for(int i = 0;i<v.size();i++){
+      if(v[i].size()<len){
+          continue;
+      }
+      string temp1 = v[i].substr(0,len);
+      if(temp1 == Pattern){
+          ans.push_back(m[i]);
+      }
+  }
+  if(ans.size() == 0){
+      return {"-1"};
+  }
+      sort(ans.begin(),ans.end());
+      return ans;
+    }
+};
