@@ -1,0 +1,40 @@
+class Solution
+{
+   public:
+void Rearrange(int arr[], int n)
+{
+      queue<int> pos;
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] >= 0)
+            pos.push(arr[i]);
+    }
+    int ptr1 = 0, ptr2 = 1;
+    while (ptr1 < n && ptr2 < n)
+    {                                                 
+        if (arr[ptr1] < 0 && arr[ptr2] < 0 || arr[ptr1] < 0 && arr[ptr2] >= 0)
+        {
+            ++ptr1;
+            ++ptr2;
+        }
+        else if (arr[ptr1] >= 0 && arr[ptr2] < 0)
+        {
+            swap(arr[ptr1],arr[ptr2]);
+            ++ptr1;
+            ++ptr2;
+        }
+        else {
+            ptr2++;
+        }
+    }
+    int x = pos.size();
+    for (int i = n - x; i < n && !pos.empty(); i++)
+    {
+            arr[i] = pos.front();
+            if (!pos.empty())
+                pos.pop();
+    }
+}
+        
+};
+
