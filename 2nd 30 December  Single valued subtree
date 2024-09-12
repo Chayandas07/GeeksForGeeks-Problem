@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+    public:
+    int ans=0;
+    
+    bool func(Node *root){
+        if(root->left==NULL && root->right==NULL){
+            ans++;
+            return true;
+        }
+        
+        // Now we have to see the values
+        int ans1=1,ans2=1;
+        if(root->left!=NULL){
+            ans1&=func(root->left);
+            if(root->left->data!=root->data)ans2=0;
+        }
+        if(root->right!=NULL){
+            ans1&=func(root->right);
+            if(root->right->data!=root->data)ans2=0;
+        }
+        
+        if(ans1 && ans2)ans++;
+        return ans1 && ans2;
+    }
+    
+    int singlevalued(Node *root)
+    {
+        //code here
+        //Go in two directions and find the best possible 
+        //first check if two sizesa are true or not and then check the value
+        if(root==NULL)return 0;
+        func(root);
+        return ans;
+    }
+    
+};
