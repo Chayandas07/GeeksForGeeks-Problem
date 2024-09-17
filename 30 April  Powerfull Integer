@@ -1,0 +1,20 @@
+class Solution{
+public:
+    int powerfullInteger(int n,vector<vector<int>> &intervals,int k){
+        // Code here
+        map<int,int> mp;
+        for(auto &x:intervals){
+            mp[x[0]]++;
+            if(mp.count(x[1])==0) mp[x[1]] = 0; // modified line
+            mp[x[1]+1]--;
+        }
+        int cur = 0;
+        int ans = -1;
+        
+        for(auto &x:mp){
+            cur+=x.second;
+            if(cur>=k) ans = max(ans,x.first);
+        }
+        return ans;
+    }
+};
