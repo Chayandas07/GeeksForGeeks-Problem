@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+    int abs1=INT_MAX,abs2 = INT_MAX;
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    {
+        // Your code goes here
+        if(!root) return;
+        findPreSuc(root->left,pre,suc,key);
+        int val = root->key;
+        if(root->key < key){
+            if(key-val<abs1){
+                pre = root;
+                abs1 = key - val;
+            }
+        }
+        if(root->key > key){
+            if(val-key<abs2)
+                suc = root;
+                abs2 = val - key;
+        }
+        findPreSuc(root->right,pre,suc,key);
+    }
+};
