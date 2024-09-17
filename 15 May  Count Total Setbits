@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int countBitsUtil(int n) {
+        int bits = 0;
+        int powerOfTwo = 1;
+        while (powerOfTwo <= n) {
+            int pairsOfOnes = (n + 1) / (powerOfTwo * 2) * powerOfTwo;
+            int extraOnes = max(0, (n + 1) % (powerOfTwo * 2) - powerOfTwo);
+            bits += pairsOfOnes + extraOnes;
+            powerOfTwo <<= 1;
+        }
+        return bits;
+    }
+
+    long long countBits(long long N) {
+        return countBitsUtil(N);
+    }
+};
+
