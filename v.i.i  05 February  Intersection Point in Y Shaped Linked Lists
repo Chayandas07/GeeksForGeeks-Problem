@@ -1,0 +1,15 @@
+class Solution
+{
+public:
+    int intersectPoint(Node* head1, Node* head2)
+    {
+        Node*x=head1,*y=head2;
+        while(x!=y){
+            x=x->next;
+            y=y->next;
+            if(y==NULL) y=head1;
+            if(x==NULL) x=head2;
+        }
+        return x->data;
+    }
+};
