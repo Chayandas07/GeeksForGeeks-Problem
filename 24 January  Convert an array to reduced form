@@ -1,0 +1,21 @@
+class Solution{
+public: 
+ // Converts arr[0..n-1] to reduced form.
+ void convert(int arr[], int n) {
+     //push the value and its index as pair into a vector
+     vector<pair<int,int>> v;
+     for(int i=0; i<n; i++){
+         v.push_back({arr[i], i});
+     }
+     //sort them according to the value
+     sort(v.begin(), v.end());
+     
+     int k=0;
+     //replace each position with the reduced value
+     for(auto it : v){
+         arr[it.second] = k;
+         k++;
+     }
+ }
+
+};
