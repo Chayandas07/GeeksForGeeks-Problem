@@ -1,0 +1,41 @@
+class Solution{   
+public:
+    void dfs(vector<vector<int>> &mat,int i,int j,int n,int m,vector<vector<bool>> &visited){
+        if(i<0 || i>=n || j<0 || j>=m  || visited[i][j])
+            return;
+        visited[i][j] = true;
+        
+        if(j+1 < m && mat[i][j+1] >= mat[i][j] && !visited[i][j+1]) // right
+            dfs(mat,i,j+1,n,m,visited);
+        if(i+1 < n && mat[i+1][j] >= mat[i][j] && !visited[i+1][j]) // down
+            dfs(mat,i+1,j,n,m,visited);
+        if(j-1 >= 0 && mat[i][j-1] >= mat[i][j] && !visited[i][j-1]) //left
+            dfs(mat,i,j-1,n,m,visited);
+        if(i-1 >= 0 && mat[i-1][j] >= mat[i][j] && !visited[i-1][j])// up
+            dfs(mat,i-1,j,n,m,visited);
+    }
+
+    int water_flow(vector<vector<int>> &mat,int N,int M){
+    // Write your code here.
+        vector<vector<bool>> indian(N,vector<bool>(M,false));
+        vector<vector<bool>> arabian(N,vector<bool>(M,false));
+        
+        for(int j=0;j<M;j++)
+            dfs(mat,0,j,N,M,indian);
+        for(int i=0;i<N;i++)
+            dfs(mat,i,0,N,M,indian);
+        for(int j=0;j<M;j++)
+            dfs(mat,N-1,j,N,M,arabian);
+        for(int i=0;i<N;i++)
+            dfs(mat,i,M-1,N,M,arabian);
+            
+        int ans=0;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<M;j++){
+                if(indian[i][j] && arabian[i][j])
+                    ans++;
+            }
+        }
+        return ans;
+    }
+};

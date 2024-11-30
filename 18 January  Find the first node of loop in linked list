@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+     //Function to find first node if the linked list has a loop.
+    int findFirstNode(Node* head)
+    {
+        if (!head)
+        {
+            return (-1);
+        }
+        Node *slow = head;
+        Node *fast = head;
+        
+        //floyd's algorithm
+        while(slow && fast && fast -> next)
+        {
+            slow = slow -> next;
+            fast = fast -> next -> next;
+            
+            if (fast == slow)
+            {
+                //loop detected
+                slow = head;
+                
+                //move both pointers at same pace
+                while(slow != fast)
+                {
+                    slow = slow -> next;
+                    fast = fast -> next;
+                }
+                return (slow -> data);
+                
+            }
+        }
+        // no loop
+        return (-1);
+    }
+};

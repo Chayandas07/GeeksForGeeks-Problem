@@ -1,0 +1,43 @@
+class Solution {
+  public:
+    void traverse(Node* node, vector<int>& ans, int level ){
+        if(node == NULL )
+            return;
+        if(ans.size()>=level){
+            ans[level-1] = max(node->data, ans[level-1]);
+        }
+        else{
+            ans.push_back(node->data);
+        }
+        traverse(node->left, ans, level+1);
+        traverse(node->right, ans, level+1);
+    }
+    // Takes O(n) Time complexity and O(H) space complexity
+    void dfs(Node* node, vector<int>&ans){
+        if (node==NULL)
+            return;
+        stack<pair<Node*, int>> s;
+        s.push({node, 1});
+        while(!s.empty()){
+            auto it = s.top();
+            s.pop();
+            if(ans.size()>=it.second){
+                ans[it.second-1] = max(it.first->data, ans[it.second-1]);
+            }
+            else{
+                ans.push_back(it.first->data);
+            }
+            if(it.first->left != NULL )
+                s.push({it.first->left, it.second+1});
+            if(it.first->right != NULL )
+                s.push({it.first->right, it.second+1});
+        }
+    }
+    vector<int> maximumValue(Node* node) {
+        vector<int> ans;
+        // int level = 1;
+        // traverse(node, ans, level);
+        dfs(node, ans);
+        return ans;
+    }
+};

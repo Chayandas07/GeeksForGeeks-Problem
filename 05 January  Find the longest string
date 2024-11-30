@@ -1,0 +1,39 @@
+class Solution
+{
+public:
+    string longestString(vector<string> &words)
+    {
+         sort(words.begin(),words.end(),[&](string &a,string &b){
+        return a.size()<b.size();
+    });
+    string ans="";
+        set<string>s(words.begin(),words.end());
+        for(int i=0;i<words.size();i++)
+        {
+            string a=words[i];
+            string word="";
+            int c=0;
+            for(int j=0;j<a.length();j++)
+            {
+                word+=a[j];
+                if(s.find(word)==s.end())
+                break;
+                else
+                c++;
+            }
+            if(c==a.length())
+            {
+                if(ans.length()!=c)
+                {
+                    ans=a;
+                }
+                else if(ans.length()==c)
+                {
+                    if(ans>a)
+                    ans=a;
+                }
+            }
+        }
+        return ans;
+    }
+};
