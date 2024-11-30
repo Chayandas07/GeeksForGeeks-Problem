@@ -1,0 +1,19 @@
+class Solution{
+public: 
+ // calculate the maximum sum with out adjacent
+ int findMaxSum(int *arr, int n) {
+     if(n==1) return arr[0];
+     int a=arr[0];
+     
+     int b=max(arr[0],arr[1]);
+     int curr=0;
+     for(int i=2;i<n;i++)
+     {
+         curr=max(b,arr[i]+a);
+         a=b;
+         b=curr;
+         
+     }
+     return max(a,b);
+ }
+};
