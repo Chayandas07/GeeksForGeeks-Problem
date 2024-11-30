@@ -1,0 +1,21 @@
+class Solution{   
+public:
+    long long int distinctColoring(int N, int r[], int g[], int b[]){
+        // code here
+         long long int dpr[N];
+        long long int dpg[N];
+        long long int dpb[N];
+        dpr[0]=r[0];
+        dpg[0]=g[0];
+        dpb[0]=b[0];
+        
+        for(int i=1;i<N;i++){
+            dpr[i]=min(dpg[i-1],dpb[i-1])+r[i];
+            dpg[i]=min(dpr[i-1],dpb[i-1])+g[i];
+            dpb[i]=min(dpr[i-1],dpg[i-1])+b[i];
+        }
+        long long int mini=min(dpr[N-1],min(dpg[N-1],dpb[N-1]));
+        return mini;
+       
+    }
+};

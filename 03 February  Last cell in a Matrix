@@ -1,0 +1,24 @@
+class Solution{
+    public:
+    pair<int,int> endPoints(vector<vector<int>> matrix, int R, int C){
+        //code here
+        int x=0;
+        int y=0;
+        int dir =0;
+        int dirx[] = {0,1,0,-1};
+        int diry[] = {1,0,-1,0};
+        while(x>=0 && y>=0 && x<R && y< C){
+            if(matrix[x][y]){
+                dir = (dir+1)%4;
+                matrix[x][y] =0;
+                
+            }
+            x+=dirx[dir];
+            y += diry[dir];
+        }
+        pair<int,int> ans;
+        ans.first = x-dirx[dir];
+        ans.second = y-diry[dir];
+        return ans;
+    }
+};

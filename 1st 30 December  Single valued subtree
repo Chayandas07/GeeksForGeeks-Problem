@@ -1,0 +1,32 @@
+class Solution
+{
+
+    public:
+    int c=0;
+    int p=0;
+    int fun1(Node *r,int val){
+       if(r==NULL)
+        return 0;
+        
+    if(r->data==val)
+     p++;
+    
+    return 1+fun1(r->left,val)+fun1(r->right,val);
+    }
+    void fun(Node *r){
+        if(r==NULL)
+         return ;
+         p=0;
+        if(fun1(r,r->data)==p) 
+         c++;
+         
+         fun(r->left);
+         fun(r->right);
+    }
+    int singlevalued(Node *root)
+    {
+        fun(root);
+        return c;
+    }
+    
+};
